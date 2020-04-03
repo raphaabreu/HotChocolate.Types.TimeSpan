@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>HotChocolate</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Raphael Lorenzeto de Abreu</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>Simple extension to the original HotChocolate Type system to include basic support for `TimeSpan`s.</Description>
+    <RepositoryUrl>https://github.com/raphaabreu/HotChocolate.Types.TimeSpan</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageProjectUrl>https://github.com/raphaabreu/HotChocolate.Types.TimeSpan</PackageProjectUrl>
+    <PackageTags>hotchocolate timespan</PackageTags>
+    <Copyright>MIT</Copyright>
+    <Version>10.4.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HotChocolate.Types" Version="10.4.0" />
+  </ItemGroup>
+
+</Project>
