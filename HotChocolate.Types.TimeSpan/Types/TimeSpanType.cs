@@ -4,12 +4,18 @@ using HotChocolate.Language;
 
 namespace HotChocolate.Types
 {
+    /// <summary>
+    /// The `TimeSpan` scalar type represents a period of time represented in the format `[-][d.]hh:mm:ss[.fffffff]`.
+    /// </summary>
     public class TimeSpanType : ScalarType
     {
         public TimeSpanType() : base("TimeSpan")
         {
+            Description =
+                "The `TimeSpan` scalar type represents a period of time represented in the format `[-][d.]hh:mm:ss[.fffffff]`.";
         }
 
+        /// <inheritdoc />
         public override bool IsInstanceOfType(IValueNode literal)
         {
             if (literal == null)
@@ -20,6 +26,7 @@ namespace HotChocolate.Types
             return literal is StringValueNode || literal is NullValueNode;
         }
 
+        /// <inheritdoc />
         public override object ParseLiteral(IValueNode literal)
         {
             if (literal == null)
@@ -42,6 +49,7 @@ namespace HotChocolate.Types
                 nameof(literal));
         }
 
+        /// <inheritdoc />
         public override IValueNode ParseValue(object value)
         {
             if (value == null)
@@ -49,7 +57,7 @@ namespace HotChocolate.Types
                 return new NullValueNode(null);
             }
 
-            if (value is System.TimeSpan t)
+            if (value is TimeSpan t)
             {
                 return new StringValueNode(null, t.ToString("c", CultureInfo.InvariantCulture), false);
             }
@@ -58,6 +66,7 @@ namespace HotChocolate.Types
                 "The specified value has to be a TimeSpan in order to be parsed by the TimeSpanType.");
         }
 
+        /// <inheritdoc />
         public override object Serialize(object value)
         {
             if (value == null)
@@ -65,7 +74,7 @@ namespace HotChocolate.Types
                 return null;
             }
 
-            if (value is System.TimeSpan t)
+            if (value is TimeSpan t)
             {
                 return t.ToString("c", CultureInfo.InvariantCulture);
             }
@@ -74,6 +83,7 @@ namespace HotChocolate.Types
                 "The specified value cannot be serialized by the TimeSpanType.");
         }
 
+        /// <inheritdoc />
         public override bool TryDeserialize(object serialized, out object value)
         {
             if (serialized is null)
@@ -84,7 +94,7 @@ namespace HotChocolate.Types
 
             if (serialized is string s)
             {
-                var result = System.TimeSpan.TryParseExact(s, "c", CultureInfo.InvariantCulture, out var ts);
+                var result = TimeSpan.TryParseExact(s, "c", CultureInfo.InvariantCulture, out var ts);
                 value = ts;
                 return result;
             }
@@ -93,6 +103,7 @@ namespace HotChocolate.Types
             return false;
         }
 
-        public override Type ClrType => typeof(System.TimeSpan);
+        /// <inheritdoc />
+        public override Type ClrType => typeof(TimeSpan);
     }
 }
